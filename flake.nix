@@ -19,23 +19,30 @@
       mkAMI = name: self.nixosConfigurations.${name}.config.system.build.images.amazon;
     in
     {
-      nixosConfigurations.minimal = lib.nixosSystem {
+      nixosConfigurations.x86_64-minimal = lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          # "${nixpkgs}/nixos/modules/virtualisation/amazon-image.nix"
-          ./configurations/minimal.nix
+          ./configurations/x86_64-minimal.nix
         ];
       };
 
+      nixosConfigurations.aarch64-minimal = lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configurations/aarch64-minimal.nix
+        ];
+      };
       packages = forSystems (system: {
-        default = self.packages.${system}.minimal;
-        minimal = mkAMI "minimal";
+        default = self.packages.${system}.x86;
+        x86 = mkAMI "x86_64-minimal";
+        aarch = mkAMI "aarch64-minimal";
       });
 
       apps = forSystems (system: {
-        default = self.apps.${system}.minimal;
-        minimal = mkVM "minimal";
-        # An image with hardware configuration relevant to irene 
+        default = self.apps.${system}.x86;
+        x86 = mkVM "x86_64-minimal";
+        aarch = mkVM "aarch64-minimal";
+        # An image with hardware configuration relevant to irene
         irene = mkVM "irene";
       });
 

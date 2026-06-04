@@ -62,7 +62,7 @@ roles bucket=default_bucket: create-aws
 setup bucket: login (roles bucket)
   echo "{{bucket}}" > aws/.bucket
 
-build image="minimal":
+build image="x86":
   #!/usr/bin/env bash
   nix build .#{{image}}
 
