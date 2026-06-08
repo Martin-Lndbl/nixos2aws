@@ -5,8 +5,10 @@
 }:
 {
   boot.kernelPackages = pkgs.linuxPackages_7_0;
+  boot.loader.grub.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  nixpkgs.buildPlatform = "x86_64-linux";
   nixpkgs.hostPlatform = "aarch64-linux";
 
   environment.systemPackages = with pkgs; [
@@ -31,6 +33,8 @@
     "nix-command"
     "flakes"
   ];
+
+  networking.modemmanager.enable = false;
 
   services.envfs.enable = true;
 
