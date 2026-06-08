@@ -4,10 +4,15 @@
   ...
 }:
 {
-  boot.kernelPackages = pkgs.linuxPackages_7_0;
-
-  nixpkgs.buildPlatform = "x86_64-linux";
+  # nixpkgs.buildPlatform = "x86_64-linux";
   nixpkgs.hostPlatform = "aarch64-linux";
+
+  boot.loader.grub.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.getty.autologinUser = "root";
+  users.users.root.initialHashedPassword = "";
 
   environment.systemPackages = with pkgs; [
     gdb
@@ -19,10 +24,12 @@
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize = 1024;
-      cores = 4;
+      cores = 1;
       graphics = false;
     };
   };
+
+  networking.modemmanager.enable = false;
 
   services.openssh.enable = true;
   networking.hostName = "aws";
