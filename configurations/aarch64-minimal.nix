@@ -11,11 +11,6 @@
 
   nixpkgs.hostPlatform = "aarch64-linux";
 
-  boot.kernelPackages = pkgs.linuxPackages_7_0;
-  boot.loader.grub.enable = false;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   services.getty.autologinUser = "root";
   users.users.root.initialHashedPassword = "";
 
