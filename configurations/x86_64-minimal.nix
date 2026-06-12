@@ -4,6 +4,8 @@
   ...
 }:
 {
+  boot.kernelPackages = pkgs.linuxPackages_7_0;
+
   environment.systemPackages = with pkgs; [
     gdb
     vim

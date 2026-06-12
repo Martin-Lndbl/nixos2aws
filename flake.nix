@@ -57,6 +57,14 @@
             gdb
             awscli2
             just
+
+            (python313.withPackages (
+              ps: with ps; [
+                boto3
+                botocore
+                awscrt
+              ]
+            ))
           ];
 
         }

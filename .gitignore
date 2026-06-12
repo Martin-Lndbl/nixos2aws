@@ -2,3 +2,4 @@
 aws
 result
 .direnv
+*.raw
