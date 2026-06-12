@@ -29,8 +29,6 @@
     };
   };
 
-  networking.modemmanager.enable = false;
-
   services.openssh.enable = true;
   networking.hostName = "aws";
 
